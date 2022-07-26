@@ -7,10 +7,10 @@ jobs:
       matrix:
         runs-on: [macos-latest, windows-latest, ubuntu-latest]
         compile-profile: [dev, release]
-        include:
-          - target: aarch64-apple-darwin
-            runs-on: macos-latest
-            new_target: Test
+        target: [aarch64-apple-darwin, x86_64-apple-darwin]
+        exclude:
+          - runs-on: [windows-latest, ubuntu-latest]
+            target: [aarch64-apple-darwin, x86_64-apple-darwin]
     runs-on: ${{matrix.runs-on}}
     steps:
       - run: sudo apt-get install -y libasound2-dev portaudio19-dev build-essential libpulse-dev libdbus-1-dev libudev-dev pkg-config
@@ -20,6 +20,8 @@ jobs:
         with:
           toolchain: stable
           target: ${{matrix.target}}
+      - run: rustup target install ${{matrix.target}}
+        if: ${{matrix.runs-on == 'macos-latest'}}
       - uses: actions-rs/cargo@v1
         with:
           command: build

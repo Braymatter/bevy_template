@@ -11,12 +11,12 @@ jobs:
             runs-on: macosx-latest
     runs-on: ${{matrix.runs-on}}
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup
-    - uses: https://github.com/actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-    - uses: actions-rs/cargo@v1
-      with:
-        command: build
-        args: --${{matrix.compile-profile}} ${{"--target=" + matrix.target}} --all-features
+      - uses: actions/checkout@v3
+      - uses: actions/setup
+      - uses: https://github.com/actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --${{matrix.compile-profile}} ${{"--target=" + matrix.target}} --all-features

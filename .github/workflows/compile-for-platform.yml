@@ -9,8 +9,14 @@ jobs:
         compile-profile: [dev, release]
         target: [aarch64-apple-darwin, x86_64-apple-darwin]
         exclude:
-          - runs-on: [windows-latest, ubuntu-latest]
-            target: [aarch64-apple-darwin, x86_64-apple-darwin]
+          - runs-on: [ubuntu-latest]
+            target: [aarch64-apple-darwin]
+          - runs-on: [ubuntu-latest]
+            target: [x86_64-apple-darwin]
+          - runs-on: [windows-latest]
+            target: [aarch64-apple-darwin]
+          - runs-on: [windows-latest]
+            target: [x86_64-apple-darwin]
     runs-on: ${{matrix.runs-on}}
     steps:
       - run: sudo apt-get install -y libasound2-dev portaudio19-dev build-essential libpulse-dev libdbus-1-dev libudev-dev pkg-config

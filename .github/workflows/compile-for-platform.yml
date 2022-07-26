@@ -12,8 +12,7 @@ jobs:
     runs-on: ${{matrix.runs-on}}
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup
-      - uses: https://github.com/actions-rs/toolchain@v1
+      - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
       - uses: actions-rs/cargo@v1

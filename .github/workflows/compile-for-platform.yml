@@ -7,7 +7,6 @@ jobs:
       matrix:
         runs-on: [macos-latest, windows-latest, ubuntu-latest]
         compile-profile: [dev, release]
-        target: [aarch64-apple-darwin, x86_64-apple-darwin]
         include:
           - runs-on: macos-latest
             target: aarch64-apple-darwin

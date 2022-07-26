@@ -11,7 +11,7 @@ jobs:
             runs-on: macosx-latest
     runs-on: ${{matrix.runs-on}}
     steps:
-      - run: sudo apt-get install -y libasound2-dev portaudio19-dev build-essential libpulse-dev libdbus-1-dev
+      - run: sudo apt-get install -y libasound2-dev portaudio19-dev build-essential libpulse-dev libdbus-1-dev libudev-dev pkg-config
         if: ${{matrix.runs-on == 'ubuntu-latest'}}
       - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1

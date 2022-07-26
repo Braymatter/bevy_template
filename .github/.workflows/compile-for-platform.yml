@@ -1,0 +1,22 @@
+name: compile-for-platform
+on: [push]
+jobs:
+  compile-for-platform:
+    strategy:
+      matrix:
+        runs-on: [macos-latest, windows-latest, ubuntu-latest]
+        compile-profile: [dev, release]
+        include:
+          - target: aarch64-apple-darwin
+            runs-on: macosx-latest
+    runs-on: ${{matrix.runs-on}}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - uses: actions-rs/cargo@v1
+      with:
+        command: build
+        args: --${{matrix.compile-profile}} ${{"--target=" + matrix.target}} --all-features

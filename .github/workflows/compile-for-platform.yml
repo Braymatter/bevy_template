@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         compile-profile: [dev, release]
-        target: [x86_64-apple-darwin, aarch-apple-darwin]
+        target: [x86_64-apple-darwin, aarch64-apple-darwin]
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3

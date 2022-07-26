@@ -19,6 +19,14 @@ jobs:
         with:
           command: build
           args: --profile ${{matrix.compile-profile}} --all-features
+      - uses: actions/upload-artifact@v3
+        with:
+          path: target/release/*.exe
+        if: ${{matrix.compile-profile == 'release'}}
+      - uses: actions/upload-artifact@v3
+        with:
+          path: target/debug/*.exe
+        if: ${{matrix.compile-profile == 'dev'}}
   compile-for-apple:
     strategy:
       fail-fast: false
@@ -36,4 +44,19 @@ jobs:
         with:
           command: build
           args: --profile ${{matrix.compile-profile}} --all-features --target ${{matrix.target}}
-
+      - uses: actions/upload-artifact@v3
+        with:
+          path: target/release/*.exe
+        if: ${{matrix.compile-profile == 'release'}}
+      - uses: actions/upload-artifact@v3
+        with:
+          path: target/debug/*.exe
+        if: ${{matrix.compile-profile == 'dev'}}
+  upload-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v3
+        with:
+          path: assets
+        

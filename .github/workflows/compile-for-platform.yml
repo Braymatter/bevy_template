@@ -3,12 +3,13 @@ on: [push]
 jobs:
   compile-for-platform:
     strategy:
+      fail-fast: false
       matrix:
         runs-on: [macos-latest, windows-latest, ubuntu-latest]
         compile-profile: [dev, release]
         include:
-          - target: --target=aarch64-apple-darwin
-            runs-on: macosx-latest
+          - target: aarch64-apple-darwin
+            runs-on: macos-latest
     runs-on: ${{matrix.runs-on}}
     steps:
       - run: sudo apt-get install -y libasound2-dev portaudio19-dev build-essential libpulse-dev libdbus-1-dev libudev-dev pkg-config
@@ -17,7 +18,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          target: ${{matrix.target}}
       - uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --profile ${{matrix.compile-profile}} ${{matrix.target}} --all-features
+          args: --profile ${{matrix.compile-profile}} --all-features

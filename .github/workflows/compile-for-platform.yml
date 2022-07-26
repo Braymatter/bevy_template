@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup
-    - uses: actions-rs/toolchain@v1
+    - uses: https://github.com/actions-rs/toolchain@v1
       with:
         toolchain: stable
     - uses: actions-rs/cargo@v1

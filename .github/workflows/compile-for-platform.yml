@@ -41,6 +41,7 @@ jobs:
         target: [x86_64-apple-darwin, aarch64-apple-darwin]
     runs-on: macos-latest
     steps:
+      - run: cc --version
       - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
         with:
@@ -52,7 +53,6 @@ jobs:
         with:
           command: build
           args: --profile ${{matrix.compile-profile}} --all-features --target ${{matrix.target}}
-      - run: cc -version
       - uses: actions/upload-artifact@v3
         with:
           name: ${{github.event.repository.name}}-${{matrix.target}}_${{matrix.compile-profile}}

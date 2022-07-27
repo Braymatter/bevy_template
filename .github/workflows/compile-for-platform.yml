@@ -45,6 +45,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          override: true
+          default: true
       - run: rustup target add ${{matrix.target}}
       - uses: actions-rs/cargo@v1
         with:
